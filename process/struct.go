@@ -3,7 +3,7 @@ package process
 import (
 	"time"
 
-	"exemple.com/psutil/cpu"
+	"github.com/Rikeld0/psutil/cpu"
 )
 
 const MAX_PATH = 260
