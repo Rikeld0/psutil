@@ -36,9 +36,9 @@ func processMemInfo(pid uint32) (bool, error) {
 	mkernel32 := syscall.MustLoadDLL("kernel32.dll")
 	procGetProcessMemoryInfo1 := mkernel32.MustFindProc("GetProcessMemoryInfo")
 	handle := OpenProcessHandle(int(pid))
-	var memory ProcessMmoryCounters
+	var memory *ProcessMmoryCounters = &ProcessMmoryCounters{}
 	const infoSize = unsafe.Sizeof(memory)
-	result, _, _ := procGetProcessMemoryInfo1.Call(uintptr(handle), uintptr(unsafe.Pointer(&memory)), infoSize)
+	result, _, _ := procGetProcessMemoryInfo1.Call(uintptr(handle), uintptr(unsafe.Pointer(memory)), infoSize)
 	fmt.Println(result)
 	if result != 0 {
 		return true, nil
